@@ -15,7 +15,7 @@ public class Country {
     @Column(name = "country_capital")
     private String countryCapital;
     @Column(name = "country_independence_date")
-    private String countryIdependenceDate;
+    private String countryIndependenceDate;
 
     public void setCountryId(Long countryId) {
         this.countryId = countryId;
@@ -41,11 +41,11 @@ public class Country {
         this.countryCapital = countryCapital;
     }
 
-    public String getCountryIdependenceDate() {
-        return countryIdependenceDate;
+    public String getCountryIndependenceDate() {
+        return countryIndependenceDate;
     }
 
-    public void setCountryIdependenceDate(String countryIdependenceDate) {
-        this.countryIdependenceDate = countryIdependenceDate;
+    public void setCountryIndependenceDate(String countryIndependenceDate) {
+        this.countryIndependenceDate = countryIndependenceDate;
     }
 }

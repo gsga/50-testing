@@ -23,23 +23,24 @@ public class IndependencyController {
     CountryRepository countryRepository;
     DiferenciaEntreFechas diferenciaEntreFechas;
 
-    public IndependencyController(CountryRepository countryRepository,DiferenciaEntreFechas diferenciaEntreFechas) {
+    public IndependencyController(CountryRepository countryRepository, DiferenciaEntreFechas diferenciaEntreFechas) {
         this.countryRepository = countryRepository;
         this.diferenciaEntreFechas = diferenciaEntreFechas;
     }
 
-    @GetMapping(path = "/country/{countryId}")
-    public ResponseEntity<CountryResponse> getCountryDetails(@PathVariable("countryId") String countryId) {
+    @GetMapping(path = "/country/{countryIso}")
+    public ResponseEntity<CountryResponse> getCountryDetails(@PathVariable("countryIso") String countryIso) {
         country = Optional.of(new Country());
         countryResponse = new CountryResponse();
 
-        country = Optional.ofNullable(countryRepository.findCountryByIsoCode(countryId.toUpperCase()));
+        country = Optional.ofNullable(countryRepository.findCountryByIsoCode(countryIso.toUpperCase()));
 
         if (country.isPresent()) {
-            Period period = diferenciaEntreFechas.calculateYearsOfIndependency(country.get().getCountryIdependenceDate());
+            Period period = diferenciaEntreFechas
+                    .calculateYearsOfIndependency(country.get().getCountryIndependenceDate());
             countryResponse.setCountryName(country.get().getCountryName());
             countryResponse.setCapitalName(country.get().getCountryCapital());
-            countryResponse.setIndependenceDate(country.get().getCountryIdependenceDate());
+            countryResponse.setIndependenceDate(country.get().getCountryIndependenceDate());
             countryResponse.setDayssOfIndependency(period.getDays());
             countryResponse.setMonthsOfIndependency(period.getMonths());
             countryResponse.setYearsOfIndependency(period.getYears());
